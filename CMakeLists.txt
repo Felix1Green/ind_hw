@@ -28,6 +28,6 @@ file(GLOB sources
         "${PROJECT_SOURCE_DIR}/include/*.h"
         "${PROJECT_SOURCE_DIR}/src/*.c")
 
-
-set(CMAKE_CXX_FLAGS "--coverage")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
 add_executable(IZ ${sources})

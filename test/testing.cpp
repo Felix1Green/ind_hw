@@ -1,14 +1,14 @@
 #include "gtest/gtest.h"
 #define ERROR -1
 #define SUCCESS 0
-extern "C" {
-#include "../include/configure.h"
-}
+extern "C"{
+#include "configure.h"
+};
 FILE* t;
 
 
 TEST(QuickSort,ok){
-    if (!(t = fopen("../../test/files/sort_test.txt", "r")))
+    if (!(t = fopen(PATH_TO_SORT_TEST, "r")))
         printf("\nFILE ERROR\n");
     int cnt = add(t);
     int size = filter(cnt);
@@ -22,7 +22,7 @@ TEST(QuickSort,ok){
 }
 
 TEST(input_str,ok){
-    if(!(t = fopen("../../test/files/input_test.txt","r")))
+    if(!(t = fopen(PATH_TO_INPUT_TEST,"r")))
         printf("\nFILE ERROR\n");
     char* ex_str = (char*)"hi,friend.";
     char* ans = input_str(t);
@@ -32,19 +32,19 @@ TEST(input_str,ok){
 
 
 TEST(input_int,not_ok){
-    if(!(t = fopen("../../test/files/input_test.txt","r")))
+    if(!(t = fopen(PATH_TO_INPUT_TEST,"r")))
         printf("\nFILE ERROR\n");
     EXPECT_EQ(input_int(t),ERROR);
 }
 
 TEST(input_int,ok){
-    if(!(t = fopen("../../test/files/input_int_test.txt","r")))
+    if(!(t = fopen(PATH_TO_INPUT_INT_TEST,"r")))
         printf("\nFILE ERROR\n");
     EXPECT_EQ(input_int(t),15);
 }
 
 TEST(input_date,ok){
-    if(!(t = fopen("../../test/files/input_date.txt","r")))
+    if(!(t = fopen(PATH_TO_INPUT_DATE,"r")))
         printf("\nFILE ERROR\n");
     int a[3] = {12,5,2019};
     int* res = input_date(t);
@@ -59,8 +59,19 @@ TEST(print,not_ok){
     EXPECT_EQ(print(0),ERROR);
 }
 
+TEST(print,ok){
+    if(!(t = fopen(PATH_TO_SORT_TEST,"r")))
+        printf("\nFILE ERROR\n");
+    int cnt = add(t);
+    int size = filter(cnt);
+    EXPECT_EQ(print(size),SUCCESS);
+    delete1(cnt);
+    if(fil_data)
+        free(fil_data);
+}
+
 TEST(add,ok){
-    if(!(t = fopen("../../test/files/sort_test.txt","r")))
+    if(!(t = fopen(PATH_TO_SORT_TEST,"r")))
         printf("\nFILE ERROR\n");
     int cnt = add(t);
     EXPECT_EQ(cnt,5);
@@ -68,7 +79,7 @@ TEST(add,ok){
 }
 
 TEST(add,not_ok){
-    if(!(t = fopen("../../test/files/add_test.txt","r")))
+    if(!(t = fopen(PATH_TO_ADD_TEST,"r")))
         printf("\nFILE ERROR\n");
     int cnt = add(t);
     EXPECT_EQ(cnt,4);
@@ -81,7 +92,7 @@ TEST(filter,not_ok){
 }
 
 TEST(filter,ok){
-    if(!(t = fopen("../../test/files/sort_test.txt","r")))
+    if(!(t = fopen(PATH_TO_SORT_TEST,"r")))
         printf("\nFILE ERROR\n");
     data = NULL;
     int cnt = add(t);
@@ -91,7 +102,7 @@ TEST(filter,ok){
 }
 
 TEST(delete1,ok){
-    if(!(t = fopen("../../test/files/sort_test.txt","r")))
+    if(!(t = fopen(PATH_TO_SORT_TEST,"r")))
         printf("\nFILE ERROR\n");
     data = NULL;
     int cnt = add(t);

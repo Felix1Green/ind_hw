@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "../include/configure.h"
+#include "configure.h"
 extern config* data;
 extern config* fil_data;
 

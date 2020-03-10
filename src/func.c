@@ -2,7 +2,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
-#include "../include/configure.h"
+#include "configure.h"
 #define SUCCESS 0
 #define ERROR -1
 //ввод строки
