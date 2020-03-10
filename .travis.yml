@@ -30,7 +30,7 @@ script:
     - valgrind --leak-check=full --leak-resolution=med --track-origins=yes --vgdb=no ctest
     - gcovr -r ../ -e '..*/gtest/'
     - cd ../src
-    - cppcheck --inconclusive --enable=all --language=c main.c function_iz_1.c
+    - cppcheck --inconclusive --enable=all --language=c mainc.c func.c
  
 deploy:
     # выкладываем tagged-коммиты на GitHub Releases:
