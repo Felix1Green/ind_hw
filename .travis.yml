@@ -1,6 +1,6 @@
 udo:     required  # используем Virtual Machine
  
-language: cpp      
+language: c      
  
 os:
     - linux
