@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
-
+#define ERROR -1
+#define SUCCESS 0
 extern "C" {
 #include "../include/configure.h"
 }
@@ -33,7 +34,7 @@ TEST(input_str,ok){
 TEST(input_int,not_ok){
     if(!(t = fopen("../../test/files/input_test.txt","r")))
         printf("\nFILE ERROR\n");
-    EXPECT_EQ(input_int(t),-1);
+    EXPECT_EQ(input_int(t),ERROR);
 }
 
 TEST(input_int,ok){
@@ -55,7 +56,7 @@ TEST(input_date,ok){
 
 TEST(print,not_ok){
     fil_data = NULL;
-    EXPECT_EQ(print(0),-1);
+    EXPECT_EQ(print(0),ERROR);
 }
 
 TEST(add,ok){
@@ -76,7 +77,7 @@ TEST(add,not_ok){
 
 TEST(filter,not_ok){
     data = NULL;
-    EXPECT_EQ(filter(0),-1);
+    EXPECT_EQ(filter(0),ERROR);
 }
 
 TEST(filter,ok){
@@ -94,10 +95,10 @@ TEST(delete1,ok){
         printf("\nFILE ERROR\n");
     data = NULL;
     int cnt = add(t);
-    EXPECT_EQ(delete1(cnt),0);
+    EXPECT_EQ(delete1(cnt),SUCCESS);
 }
 
 TEST(delete1,not_ok){
     data = NULL;
-    EXPECT_EQ(delete1(0),-1);
+    EXPECT_EQ(delete1(0),ERROR);
 }

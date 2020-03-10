@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "../include/configure.h"
-
+#define SUCCESS 0
+#define ERROR -1
 //ввод строки
 char* input_str(FILE* f){
     int counter = 0;
@@ -81,7 +82,7 @@ int* input_date(FILE* f){
 //вывод ответа
 int print(int cnt){
     if(!fil_data)
-        return -1;
+        return ERROR;
     int i = 0;
     while(i < cnt && (fil_data+i)){
         printf("%d: %s, %s, %d, %d:%d:%d, %d:%d:%d\n",i,(fil_data+i)->name,(fil_data+i)->class1,(fil_data+i)->version,
@@ -89,7 +90,7 @@ int print(int cnt){
                (fil_data+i)->date_upd.tm_mday,(fil_data+i)->date_upd.tm_mon+1,(fil_data+i)->date_upd.tm_year + 1900);
         i++;
     }
-    return 0;
+    return SUCCESS;
 }
 
 
@@ -110,7 +111,7 @@ int add(FILE* f){
         }
         printf("enter version of product\n");
         int version = input_int(f);
-        if(version == -1) {
+        if(version == ERROR) {
             free(name),free(class);
             return cnt;
         }
@@ -135,7 +136,7 @@ int add(FILE* f){
         }
         if(!data){
             free(name),free(class),free(date_inst),free(date_upd);
-            return 0;
+            return ERROR;
         }
         (data+cnt)->name = name;
         (data+cnt)->class1 = class;
@@ -155,10 +156,10 @@ int add(FILE* f){
 
 int filter(int sz){
     if(!data)
-        return -1;
+        return ERROR;
     fil_data = (config*)malloc(sz*sizeof(config));
     if(!fil_data)
-        return -1;
+        return ERROR;
     size_t cnt = 0;
     time_t now = time(0);
     struct tm *local_tm = localtime(&now); // текущее время
@@ -220,10 +221,10 @@ void QuickSort(int a,int b){
 //очистка динамически выделенной памяти
 int delete1(int cnt){
     if(!data){
-        return -1;
+        return(ERROR);
     }
     for(int i = 0; i < cnt; i ++)
         free((data + i)->class1),free((data + i)->name);
     free(data);
-    return(0);
+    return(SUCCESS);
 }
