@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/configure.h
+
+/home/felix/CLionProjects/park/ind_hw/src/func.c
+stdlib.h
+-
+time.h
+-
+stdio.h
+-
+string.h
+-
+configure.h
+/home/felix/CLionProjects/park/ind_hw/src/configure.h
+
+/home/felix/CLionProjects/park/ind_hw/src/mainc.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+time.h
+-
+configure.h
+/home/felix/CLionProjects/park/ind_hw/src/configure.h
+

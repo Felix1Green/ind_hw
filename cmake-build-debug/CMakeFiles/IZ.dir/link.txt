@@ -1,0 +1,1 @@
+/usr/bin/cc  --coverage -fprofile-arcs -ftest-coverage -g  -rdynamic CMakeFiles/IZ.dir/src/func.c.o CMakeFiles/IZ.dir/src/mainc.c.o  -o IZ 
