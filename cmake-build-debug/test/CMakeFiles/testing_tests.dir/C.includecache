@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/configure.h
+
+/home/felix/CLionProjects/park/ind_hw/src/func.c
+stdlib.h
+-
+time.h
+-
+stdio.h
+-
+string.h
+-
+configure.h
+/home/felix/CLionProjects/park/ind_hw/src/configure.h
+

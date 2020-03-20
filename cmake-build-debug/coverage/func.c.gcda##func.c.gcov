@@ -1,0 +1,371 @@
+        -:    0:Source:/home/felix/CLionProjects/park/ind_hw/src/func.c
+        -:    0:Graph:/home/felix/CLionProjects/park/ind_hw/cmake-build-debug/test/CMakeFiles/testing_tests.dir/__/src/func.c.gcno
+        -:    0:Data:/home/felix/CLionProjects/park/ind_hw/cmake-build-debug/test/CMakeFiles/testing_tests.dir/__/src/func.c.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include <stdlib.h>
+        -:    2:#include <time.h>
+        -:    3:#include <stdio.h>
+        -:    4:#include <string.h>
+        -:    5:#include "../include/configure.h"
+        -:    6:#define SUCCESS 0
+        -:    7:#define ERROR -1
+        -:    8://ввод строки
+       66:    9:char* input_str(FILE* f){
+       66:    9-block  0
+       66:   10:    int counter = 0;
+       66:   11:    int size_a = 0;
+       66:   12:    char* string = NULL;
+       66:   13:    char c = '\0';
+      268:   14:    while(c = getc(f), c != EOF && c!= '\n'){
+       66:   14-block  0
+      268:   14-block  1
+      263:   14-block  2
+      202:   14-block  3
+       66:   14-block  4
+      268:   14-block  5
+      202:   15:        if(counter >= size_a){
+      202:   15-block  0
+      167:   16:            char* tmp_string = malloc(((!size_a ? 2:size_a*2+1)*sizeof(char)));
+      167:   16-block  0
+      106:   16-block  1
+       61:   16-block  2
+      167:   17:            size_a = (!size_a ? 1: size_a*2);
+      167:   17-block  0
+      106:   17-block  1
+       61:   17-block  2
+      167:   18:            if(!tmp_string){
+      167:   18-block  0
+    #####:   19:                if(string)
+    $$$$$:   19-block  0
+    #####:   20:                    free(string);
+    $$$$$:   20-block  0
+    #####:   21:                return NULL;
+    $$$$$:   21-block  0
+        -:   22:            }
+      167:   23:            if(string){
+      167:   23-block  0
+      106:   24:                strcpy(tmp_string,string);
+      106:   25:                free(string);
+      106:   25-block  0
+        -:   26:            }
+      167:   27:            string = tmp_string;
+      167:   27-block  0
+        -:   28:        }
+      202:   29:        string[counter++] = c;
+      202:   30:        string[counter] = '\0';
+      202:   30-block  0
+        -:   31:    }
+       66:   32:    if(c == EOF){
+       66:   32-block  0
+        5:   33:        if(string)
+        5:   33-block  0
+    #####:   34:            free(string);
+    $$$$$:   34-block  0
+        5:   35:        return NULL;
+        5:   35-block  0
+        -:   36:    }
+       61:   37:    return string;
+       61:   37-block  0
+        -:   38:}
+        -:   39:
+        -:   40:// ввод целочисленных значений
+      213:   41:int input_int(FILE* f){
+      213:   41-block  0
+      213:   42:    int result = -1;
+      213:   43:    char c = '\0';
+      726:   44:    while(c=getc(f),c != EOF && c != '\n' && c!=' '){
+      213:   44-block  0
+      726:   44-block  1
+      719:   44-block  2
+      633:   44-block  3
+      513:   44-block  4
+      213:   44-block  5
+      726:   44-block  6
+      513:   45:        if(c >= '0' && c <= '9') {
+      513:   45-block  0
+      513:   45-block  1
+      512:   46:            if(result < 0)
+      512:   46-block  0
+      211:   47:                result = 0;
+      211:   47-block  0
+      512:   48:            result = result * 10 +  (c - '0');
+      512:   48-block  0
+        -:   49:        }
+        -:   50:        else{
+       10:   51:            while(c=getc(f),c!=EOF && c !='\n');
+        1:   51-block  0
+       10:   51-block  1
+       10:   51-block  2
+        9:   51-block  3
+        1:   51-block  4
+       10:   51-block  5
+        1:   52:            result = -1;
+        1:   52-block  0
+        -:   53:        }
+        -:   54:    }
+      213:   55:    return(result);
+      213:   55-block  0
+        -:   56:}
+        -:   57:
+        -:   58://ввод даты
+       61:   59:int* input_date(FILE* f){
+       61:   59-block  0
+       61:   60:    int* a = malloc(3*sizeof(int));
+       61:   61:    if(!a)
+       61:   61-block  0
+    #####:   62:        return NULL;
+    $$$$$:   62-block  0
+       61:   63:    size_t day = input_int(f);
+       61:   63-block  0
+       61:   64:    if(day < 1 || day > 31){
+       61:   64-block  0
+        1:   65:        free(a);
+        1:   66:        return NULL;
+        1:   66-block  0
+        -:   67:    }
+       60:   68:    size_t month = input_int(f);
+       60:   68-block  0
+       60:   69:    if(month < 1 || month > 12){
+       60:   69-block  0
+    #####:   70:        free(a);
+    #####:   71:        return NULL;
+    $$$$$:   71-block  0
+        -:   72:    }
+       60:   73:    size_t year = input_int(f);
+       60:   73-block  0
+       60:   74:    if(year < 1900){
+    #####:   75:        free(a);
+    #####:   76:        return NULL;
+    $$$$$:   76-block  0
+        -:   77:    }
+       60:   78:    a[0] = day,a[1] = month,a[2] = year;
+       60:   79:    return a;
+       60:   79-block  0
+        -:   80:}
+        -:   81:
+        -:   82://вывод ответа
+        2:   83:int print(int cnt){
+        2:   83-block  0
+        2:   84:    if(!fil_data)
+        2:   84-block  0
+        1:   85:        return ERROR;
+        1:   85-block  0
+        1:   86:    int i = 0;
+        6:   87:    while(i < cnt && (fil_data+i)){
+        1:   87-block  0
+        6:   87-block  1
+        5:   87-block  2
+        5:   88:        printf("%d: %s, %s, %d, %d:%d:%d, %d:%d:%d\n",i,(fil_data+i)->name,(fil_data+i)->class1,(fil_data+i)->version,
+        5:   88-block  0
+       15:   89:               (fil_data+i)->date_inst.tm_mday,(fil_data+i)->date_inst.tm_mon+1,(fil_data+i)->date_inst.tm_year + 1900,
+       15:   90:               (fil_data+i)->date_upd.tm_mday,(fil_data+i)->date_upd.tm_mon+1,(fil_data+i)->date_upd.tm_year + 1900);
+        5:   91:        i++;
+        -:   92:    }
+        1:   93:    return SUCCESS;
+        1:   93-block  0
+        -:   94:}
+        -:   95:
+        -:   96:
+        -:   97:
+        6:   98:int add(FILE* f){
+        6:   98-block  0
+        6:   99:    int cnt = 0;
+        6:  100:    int size = 0;
+        6:  101:    char* name = NULL;
+        -:  102:    // добавление новых продуктов в структуру
+       35:  103:    while(printf("Enter name for product\n"),name = input_str(f),name){
+        6:  103-block  0
+       35:  103-block  1
+       30:  104:        if(!name)
+       30:  104-block  0
+        1:  105:            return cnt;
+    $$$$$:  105-block  0
+        1:  105-block  1
+       30:  106:        printf("enter class of product\n");
+       30:  106-block  0
+       30:  107:        char* class = input_str(f);
+       30:  108:        if(!class) {
+    #####:  109:            free(name);
+    #####:  110:            return cnt;
+    $$$$$:  110-block  0
+        -:  111:        }
+       30:  112:        printf("enter version of product\n");
+       30:  112-block  0
+       30:  113:        int version = input_int(f);
+       30:  114:        if(version == ERROR) {
+    #####:  115:            free(name),free(class);
+    #####:  116:            return cnt;
+    $$$$$:  116-block  0
+        -:  117:        }
+       30:  118:        printf("enter installation date of product\n");
+       30:  118-block  0
+       30:  119:        int* date_inst = input_date(f);
+       30:  120:        if(!date_inst) {
+    #####:  121:            free(name),free(class);
+    #####:  122:            return cnt;
+    $$$$$:  122-block  0
+        -:  123:        }
+       30:  124:        printf("enter update date of product\n");
+       30:  124-block  0
+       30:  125:        int* date_upd = input_date(f);
+       30:  126:        if(!date_upd) {
+        1:  127:            free(name),free(class),free(date_inst);
+        1:  128:            return cnt;
+        1:  128-block  0
+        -:  129:        }
+       29:  130:        if(size == 0) {
+       29:  130-block  0
+        6:  131:            data = (config *)malloc(sizeof(config));
+        6:  132:            size++;
+        6:  132-block  0
+       23:  133:        }else if(cnt >= size){
+       23:  133-block  0
+       17:  134:            data = (config*)realloc(data,size*2*sizeof(config));
+       17:  135:            size*=2;
+       17:  135-block  0
+        -:  136:        }
+       29:  137:        if(!data){
+       29:  137-block  0
+    #####:  138:            free(name),free(class),free(date_inst),free(date_upd);
+    #####:  139:            return ERROR;
+    $$$$$:  139-block  0
+        -:  140:        }
+       29:  141:        (data+cnt)->name = name;
+       29:  142:        (data+cnt)->class1 = class;
+       29:  143:        (data+cnt)->version = version;
+       29:  144:        struct tm date_i = {0,0,0, date_inst[0],date_inst[1]-1,date_inst[2]-1900,0,0};
+       29:  145:        (data+cnt)->date_inst = date_i;
+       29:  146:        struct tm date_u = {0,0,0, date_upd[0],date_upd[1]-1,date_upd[2]-1900,0,0};
+       29:  147:        (data+cnt)->date_upd = date_u;
+       29:  148:        free(date_inst);
+       29:  149:        free(date_upd);
+       29:  150:        cnt++;
+       29:  150-block  0
+        -:  151:    }
+        -:  152:    //конец ввода -> конец добавления
+        5:  153:    return cnt;
+        5:  153-block  0
+        -:  154:}
+        -:  155:
+        -:  156:
+        4:  157:int filter(int sz){
+        4:  157-block  0
+        4:  158:    if(!data)
+        4:  158-block  0
+        1:  159:        return ERROR;
+        1:  159-block  0
+        3:  160:    fil_data = (config*)malloc(sz*sizeof(config));
+        3:  161:    if(!fil_data)
+        3:  161-block  0
+    #####:  162:        return ERROR;
+    $$$$$:  162-block  0
+        3:  163:    size_t cnt = 0;
+        3:  164:    time_t now = time(0);
+        3:  164-block  0
+        3:  165:    struct tm *local_tm = localtime(&now); // текущее время
+        3:  166:    int half_year_sec = 31536000/2;
+        -:  167:    // фильтрация по условию: установлены раньше чем полгода назад && ни разу не обновлялись
+       18:  168:    for(size_t i = 0; i < sz; i++){
+       15:  168-block  0
+       18:  168-block  1
+       15:  169:        if(mktime(&(data+i)->date_inst) >= mktime(&(data+i)->date_upd) && difftime(mktime(local_tm),mktime(&(data+i)->date_inst)) >= half_year_sec) {
+       15:  169-block  0
+       15:  169-block  1
+       15:  170:            *(fil_data + cnt++) = *(data + i);
+       15:  170-block  0
+        -:  171:        }
+        -:  172:    }// конец фильтра
+        3:  173:    size_t j = 0;
+        3:  174:    int borders[cnt];size_t index = 1;borders[0] = 0;
+        -:  175:    // группировка по классам
+        9:  176:    while(j != cnt){
+        3:  176-block  0
+        9:  176-block  1
+       21:  177:        for(size_t i = j+1; i < cnt;i++) {
+        6:  177-block  0
+       15:  177-block  1
+       21:  177-block  2
+       15:  178:            if (*(fil_data + i)->class1 == *(fil_data + j)->class1) {
+       15:  178-block  0
+        9:  179:                config tmp = *(fil_data + j + 1);
+        9:  180:                *(fil_data + j + 1) = *(fil_data + i);
+        9:  181:                *(fil_data + i) = tmp;
+        9:  182:                j++;
+        9:  182-block  0
+        -:  183:            }
+        6:  184:        }j++;
+        6:  185:        borders[index++] = j;
+        6:  185-block  0
+        -:  186:    }
+        -:  187:    // ---- конец группировки ----
+        -:  188:    // начало сортировки внутри класса
+        9:  189:    for(size_t i = 1; i < index; i++){
+        3:  189-block  0
+        9:  189-block  1
+        6:  190:        QuickSort(borders[i-1],borders[i]);
+        6:  190-block  0
+        -:  191:    }
+        -:  192:    // конец сортировки внутри класса
+        4:  193:    return cnt;
+        3:  193-block  0
+        4:  193-block  1
+        -:  194:}
+        -:  195:
+        -:  196:
+        -:  197://(быстрая) сортировка по именам
+        9:  198:void QuickSort(int a,int b){
+        9:  198-block  0
+        9:  199:    int l = a;
+        9:  200:    int r = b-1;
+        9:  201:    char* mid = (fil_data + (l+r)/2)->name;
+        9:  201-block  0
+        -:  202:    do{
+        9:  203:        while(strcmp((fil_data + l)->name,mid) < 0)
+        9:  203-block  0
+        9:  203-block  1
+    #####:  204:            l++;
+    $$$$$:  204-block  0
+       12:  205:        while(strcmp((fil_data + r)->name,mid) >0)
+        9:  205-block  0
+       12:  205-block  1
+        3:  206:            r--;
+        3:  206-block  0
+        9:  207:        if(l <= r){
+        9:  207-block  0
+        9:  208:            config tmp = *(fil_data + l);
+        9:  209:            *(fil_data + l) = *(fil_data + r);
+        9:  210:            *(fil_data + r) = tmp;
+        9:  211:            l++,r--;
+        9:  211-block  0
+        -:  212:        }
+        9:  213:    }while(l <= r);
+        9:  213-block  0
+        9:  214:    if(r > a)
+        9:  214-block  0
+    #####:  215:        QuickSort(a,r);
+    $$$$$:  215-block  0
+        9:  216:    if(l < b-1)
+        9:  216-block  0
+        3:  217:        QuickSort(l,b);
+        3:  217-block  0
+        9:  218:}
+        -:  219://---конец сортировки---
+        -:  220:
+        -:  221://очистка динамически выделенной памяти
+        7:  222:int delete1(int cnt){
+        7:  222-block  0
+        7:  223:    if(!data){
+        7:  223-block  0
+        1:  224:        return(ERROR);
+        1:  224-block  0
+        -:  225:    }
+       35:  226:    for(int i = 0; i < cnt; i ++)
+        6:  226-block  0
+       29:  226-block  1
+       35:  226-block  2
+       29:  227:        free((data + i)->class1),free((data + i)->name);
+        6:  228:    free(data);
+        6:  229:    return(SUCCESS);
+        6:  229-block  0
+        -:  230:}

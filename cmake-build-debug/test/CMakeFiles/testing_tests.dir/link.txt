@@ -1,0 +1,1 @@
+/usr/bin/c++   --coverage -fprofile-arcs -ftest-coverage -g  -rdynamic CMakeFiles/testing_tests.dir/__/src/func.c.o CMakeFiles/testing_tests.dir/testing.cpp.o CMakeFiles/testing_tests.dir/main.cpp.o  -o testing_tests ../googletest-build/googlemock/gtest/libgtest_maind.a ../googletest-build/googlemock/gtest/libgtestd.a -pthread 
